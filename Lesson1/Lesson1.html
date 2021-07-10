@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="card text-center">
+        <div class="card-body">
+             <h5 class="card-title">
+                1 задание
+             </h5>
+             <p>
+                <label for="gradus">Задайте температуру в градусах:</label>
+                <input class="form-control form-control-lg" id="gradus" type="number" placeholder="Градусы...">
+             </p>
+             <p>
+                <button type="button" id="calculate" class="btn btn-primary">Посчитать</button>
+             </p>
+             <hr/>
+        </div>
+        <div id="result" class="card-footer">
+        </div>
+    </div>
+</div>
+
+<div class="card text-center">
+        <div class="card-body">
+             <h5 class="card-title">
+                2 задание
+             </h5>
+             <p class="card-text">
+                Вывести Василия:
+             </p>
+             <p>
+                <button type="button" id="catch" class="btn btn-success">Василий, выходи!</button>
+             </p>
+             <hr/>
+        </div>
+        <div id="vasile" class="card-footer">
+        </div>
+    </div>
+</div>
+
+<div class="card text-center">
+        <div class="card-body">
+             <h5 class="card-title">
+                3 задание
+             </h5>
+             <p>
+                <button type="button" id="question" class="btn btn-warning">Чему будет равно JS-выражение 1000 + "108"?</button>
+             </p>
+             <hr/>
+        </div>
+        <div id="answer" class="card-footer">
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+
+    // 1. Задать температуру в градусах по Цельсию:
+    $(document).on('click', '#calculate', function() {
+
+        var Tc = $('#gradus').val();
+
+        var Tf = (9 / 5) * Tc + 32;
+
+        $('#result').html('<b>' + Tf + ' градус(-ов, -а) по Фаренгейту.</b>');
+
+    })
+
+    // 2. Вывести Василия
+    $(document).on('click', '#catch', function() {
+
+        var admin;
+        var name;
+        name = 'Василий';
+        admin = name;
+
+        $('#vasile').html('<b>' + admin + '</b>');
+
+    })
+
+    // Конкатенация...
+    $(document).on('click', '#question', function() {
+
+        var answer = 1000 + '108';
+
+        $('#answer').html('<b>' + answer + '</b>');
+
+    })
+
+</script>
+</body>
+</html>
