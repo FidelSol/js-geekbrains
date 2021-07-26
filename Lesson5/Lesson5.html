@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+</head>
+<style>
+    table {
+        width: 600px;
+        height: 600px;
+    }
+
+    .first_line {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+    }
+
+    .white {
+        width: 30px;
+        height: 30px;
+        background-color: grey;
+    }
+
+    .black {
+        width: 30px;
+        height: 30px;
+        background-color: black;
+    }
+
+
+</style>
+
+<body>
+
+<div id="busketSection"></div>
+
+<script type="text/javascript">
+
+    // 1.
+   // Создать функцию, генерирующую шахматную доску. При этом можно использовать любые html-теги по своему желанию.
+    // Доска должна быть разлинована соответствующим образом, т.е. чередовать черные и белые ячейки.
+    // Строки должны нумероваться числами от 1 до 8, столбцы – латинскими буквами A, B, C, D, E, F, G, H.
+    // (использовать createElement / appendChild)
+
+    var table = document.createElement("table");
+
+    function alpha_line(){
+        var alpha_array = ['*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', '*']
+
+        var tr = document.createElement('tr');
+
+        for (var f = 0; f < 10; f++) {
+            var td = document.createElement('td');
+            td.className = "first_line";
+            td.innerHTML = alpha_array[f];
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+
+
+
+    alpha_line()
+
+    for (var i = 0; i < 10; i++) {
+
+        var tr = document.createElement('tr');
+
+        var td = document.createElement('td');
+        td.innerHTML = i;
+        td.className = "first_line";
+        tr.appendChild(td);
+
+        for (var j = 1; j < 9; j++) {
+                td = document.createElement('td');
+                if (i%2 === j%2) {
+                    td.className = "white";
+                } else {
+                    td.className = "black";
+                }
+                tr.appendChild(td);
+        }
+
+        td = document.createElement('td');
+        td.innerHTML = i;
+        td.className = "first_line";
+        tr.appendChild(td);
+
+        table.appendChild(tr);
+    }
+
+    alpha_line()
+
+    document.body.appendChild(table);
+    console.log(table)
+
+     // 2. Сделать генерацию корзины динамической: верстка корзины не должна находиться в HTML-структуре.
+    // Там должен быть только div, в который будет вставляться корзина, сгенерированная на базе JS:
+
+    var Busket = {
+
+        busket: [],
+
+        addProduct(obj) {
+
+            console.log(`Вы добавили в корзину товар "${obj.name}" по цене ${obj.price}р. в количестве ${obj.number} штук.`);
+
+            (this.busket).forEach((element) => {
+
+                    if (element.name === name && element.price === price) {
+                        element.number += number;
+                        return this.busket
+                    }
+                });
+
+                this.busket.push(obj);
+                return this.busket;
+
+        },
+
+        countBasketPrice(){
+
+            var total_count = 0;
+            var all_price = 0;
+
+            (this.busket).forEach((element) => {
+              all_price += element.price * element.number;
+              total_count += element.number;
+            });
+
+            var busketDiv = document.getElementById('busketSection')
+
+            var span = document.createElement('span');
+
+            if (this.busket.length === 0) {
+                span.innerText = `Корзина пуста`;
+            } else span.innerText = `В корзине: ${total_count} товаров на сумму ${all_price} рублей`;
+
+            busketDiv.appendChild(span)
+        }
+
+    }
+
+
+    function Product(name, price, number) {
+        this.name = name;
+        this.price = price;
+        this.number = number;
+    }
+
+    var productOne = new Product('Тапки', 54, 4);
+    var productTwo = new Product('Сапоги', 540, 4);
+    var productThree = new Product('Шапка', 150, 40);
+    var productFour = new Product('Полотенце', 350, 10);
+
+    Busket.addProduct(productOne);
+    Busket.addProduct(productTwo);
+    Busket.addProduct(productThree);
+    Busket.addProduct(productFour);
+
+    Busket.countBasketPrice();
+
+</script>
+</body>
+</html>
