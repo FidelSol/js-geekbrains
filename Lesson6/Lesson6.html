@@ -1,0 +1,127 @@
+<html lang="en">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>JS</title>
+
+</head>
+<style type="text/css">
+   table {
+    width: 300px;
+    border-collapse: collapse;
+    text-align: center;
+   }
+   td, th {
+    padding: 3px;
+    border: 1px solid black;
+   }
+
+  </style>
+<body>
+
+ <table>
+   <tr>
+    <th>Товар</th><th>Цена(р.)</th><th>Купить</th>
+   </tr>
+   <tr>
+    <td>Башмаки</td><td>1500</td><td><button type="button" class="purchase">Купить</button></td>
+   </tr>
+   <tr>
+    <td>Шампунь</td><td>125</td><td><button type="button" class="purchase">Купить</button></td>
+   </tr>
+   <tr>
+    <td>Футболка</td><td>700</td><td><button type="button" class="purchase">Купить</button></td>
+   </tr>
+  </table>
+<hr/>
+<div id="busketSection"></div>
+
+<script type="text/javascript">
+
+    // 1.
+   // a. Добавлять в объект корзины выбранные товары по клику на кнопке «Купить» без перезагрузки страницы:
+    // b. Привязать к событию покупки товара пересчет корзины и обновление ее внешнего вида:
+
+     var Busket = {
+
+        busket: [],
+
+        addProduct(obj) {
+
+            console.log(`Вы добавили в корзину товар "${obj.name}" по цене ${obj.price}р. в количестве ${obj.number} штук.`);
+
+            (this.busket).forEach((element) => {
+
+                    if (element.name === name && element.price === price) {
+                        element.number += number;
+                        return this.busket;
+                    }
+                });
+
+                this.busket.push(obj);
+                return this.busket;
+
+        },
+
+        countBasketPrice(){
+
+            var total_count = 0;
+            var all_price = 0;
+
+            (this.busket).forEach((element) => {
+              all_price += element.price * element.number;
+              total_count += element.number;
+            });
+
+            var busketDiv = document.getElementById('busketSection');
+
+            var span = document.createElement('span');
+
+            if (this.busket.length === 0) {
+                span.innerText = `Корзина пуста`;
+            } else span.innerText = `В корзине: ${total_count} товаров на сумму ${all_price} рублей`;
+
+            busketDiv.innerHTML = span.innerText;
+        }
+
+    }
+
+    Busket.countBasketPrice();
+
+
+     function Product(name, price, number) {
+        this.name = name;
+        this.price = price;
+        this.number = number;
+    }
+
+    function addToBusket() {
+        var priceElem = this.parentElement.previousElementSibling;
+        var price = priceElem.innerText;
+        var nameElem = priceElem.previousElementSibling;
+        var name = nameElem.innerText;
+        var product = new Product(name, price, 1);
+        Busket.addProduct(product);
+        Busket.countBasketPrice();
+    }
+
+
+    var purchase = document.querySelectorAll('.purchase');
+
+    purchase.forEach(function(item) {
+            item.addEventListener("click", addToBusket, false);
+    });
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
